@@ -190,7 +190,7 @@
     function verificarFase1() {
       const r = normalizar(document.getElementById("resposta1").value);
 
-      if (["desejo", "vontade", "querer", "impulso", "tentação"].includes(r)) {
+      if (["desejo", "vontade", "querer", "desejar", "tentação"].includes(r)) {
         document.getElementById("resposta1").style.display = "none";
         document.getElementById("botaoFase1").style.display = "none";
         document.getElementById("fase1Pergunta").style.display = "none";
@@ -204,7 +204,7 @@
 
     function verificarFase2() {
       const r = normalizar(document.getElementById("resposta2").value);
-      if (["sentimento", "descontrole", "desejo", "impulso", "movimento"].includes(r)) {
+      if (["sentimento", "descontrole", "o impulso", "impulso", "movimento"].includes(r)) {
         trocarFase("fase2", "fase3");
       }
     }
