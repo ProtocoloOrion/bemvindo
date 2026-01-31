@@ -190,7 +190,7 @@
     function verificarFase1() {
       const r = normalizar(document.getElementById("resposta1").value);
 
-      if (["desejo", "vontade", "querer", "desejar", "tentação"].includes(r)) {
+      if (["desejo", "vontade", "querer", "impulso", "tentação"].includes(r)) {
         document.getElementById("resposta1").style.display = "none";
         document.getElementById("botaoFase1").style.display = "none";
         document.getElementById("fase1Pergunta").style.display = "none";
@@ -204,7 +204,7 @@
 
     function verificarFase2() {
       const r = normalizar(document.getElementById("resposta2").value);
-      if (["sentimento", "descontrole", "o impulso", "impulso", "movimento"].includes(r)) {
+      if (["sentimento", "descontrole", "desejo", "impulso", "movimento"].includes(r)) {
         trocarFase("fase2", "fase3");
       }
     }
@@ -300,10 +300,30 @@ function responderCaminho(resp) {
   estadoCaminho = caminhoFinal[estadoCaminho][resp];
   mostrarCaminho();
 }
+const nomesChave = [
+  "elly",
+  "ramon",
+  "luan",
+  "pancs",
+  "neto",
+  "toad",
+  "luiz"
+];
+
 
 function verificarIdentidade() {
   const r = normalizar(document.getElementById("respostaIdentidade").value);
 
+  // 🔥 NOMES-CHAVE
+  if (["ramon", "luan", "pancs"].includes(r)) {
+    document.querySelectorAll(".fase").forEach(f => f.classList.remove("active"));
+    document.getElementById("faseCaminho").classList.add("active");
+
+    mostrarCaminhoDireto();
+    return;
+  }
+
+  // fluxo antigo continua aqui embaixo
   let arquivoEscolhido = arquivosFinais.nulo;
 
   if (r === "anfitrião" || r === "energia") {
@@ -321,111 +341,9 @@ function verificarIdentidade() {
 }
 
 
-  const arquivoFinal = `
-perfeito, aqui vai uma ajudinha, espero que sobreviva o suficiente pra entender...
 
-ARQ▋▋▋▋▋▋▋▋▋▋▋▋▋▋
-ID: TNBRS_??_PRJ
-ESTA▉DO: ☒ ☒ ☒
-RECUPERAÇÃO: 19% ▓▓░░░░░░░░
 
-aviso// dados sobrepostos
-aviso// linguagem instável
-aviso// leitura altera o conteúdo
-
-██ não era pra ████ ler isto
-██ se você está lendo, já houve ▓falha▓
-
-cães de s█ngue
-não e█ipe
-não grupo
-n█o são muitos
-
-são o m▉smo
-
-eles não chegam
-eles já estav█m
-
-os sinos
-██ dois ██
-ou talvez
-1 + 1 ≠ 2
-
-espalh▓dos
-paran▉
-áreas ███ que rejeitam mapas
-
-cada sino escu██a
-o outro sonha
-
-medo
-m░d░
-m̷e̷d̷o̷
-
-não é efeito
-é ferram█nta
-
-ruídos controlados
-acidentes incompletos
-histórias que não terminam
-
-as pessoas preenchem o resto
-
-██ trecho repetido detectado ██
-██ checksum inválido ██
-
-UM SÃO TODOS, TODOS SÃO UM, OS DESEJOS EM SINTONIA...
-UM SÃO TODOS, TODOS SÃO UM, OS DESEJOS EM SINTONIA...
-UM SÃO TODOS, TODOS SÃO UM, OS DESEJOS EM SINTONIA...
-
-(parar leitura não interrompe)
-
-os cães
-não lati█
-não mordem
-
-observam
-anotam
-a██ustam
-
-quando o medo cai
-eles empurram
-
-quando sobe demais
-eles silenciam
-
-equilíbrio
-sempre equil▉brio
-
-███ falha neural ███
-
-pensamentos alinhando
-decisões ficando parecidas
-“eu” virando “nós”
-
-não é lavagem
-é ressonância
-
-talvez os sinos
-não queiram soar
-
-talvez
-já estejam
-
-▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉
-último fragmento legível:
-
-se os dois tocarem
-não haverá som
-haverá acordo
-
-e ninguém lembrará
-de ter discordado
-
-ARQUIVO ENCERRADO
-ou não
-integridade: irrelevante
-`;
+  
 function mostrarArquivoFinal() {
   const fase = document.getElementById("faseCaminho");
   fase.innerHTML = `
@@ -714,5 +632,66 @@ function mostrarArquivo(arquivo) {
     }
   }, 22);
 }
+function mostrarLinkCaminho() {
+  const link = document.createElement("a");
+  link.href = "https://protocoloorion.github.io/seu-caminho/";
+  link.textContent = ">> acessar caminho";
+  link.target = "_blank";
+
+  link.style.display = "block";
+  link.style.marginTop = "20px";
+  link.style.color = "#ff3ec9";
+  link.style.textDecoration = "none";
+  link.style.fontFamily = "monospace";
+  link.style.textShadow = "0 0 10px #ff3ec9";
+
+  link.onmouseover = () => {
+    link.style.color = "#ffffff";
+  };
+  link.onmouseout = () => {
+    link.style.color = "#ff3ec9";
+  };
+
+  textoEl.appendChild(link);
+}
+function mostrarCaminhoDireto() {
+  const fase = document.getElementById("faseCaminho");
+
+  // limpa tudo que existia antes (terminal incluso)
+  fase.innerHTML = `
+    <p class="glitch">
+      &gt; decision.path.loaded<br>
+      &gt; awaiting.response
+    </p>
+
+    <h1 style="
+      color:#ff4fd8;
+      text-shadow:0 0 10px #ff4fd8;
+      margin-top:20px;
+    ">
+      seu caminho é por aqui
+    </h1>
+
+    <a 
+      href="https://protocoloorion.github.io/seu-caminho/" 
+      target="_blank"
+      style="
+        display:inline-block;
+        margin-top:20px;
+        color:#ff4fd8;
+        text-decoration:none;
+        font-family:Courier New, monospace;
+        text-shadow:0 0 10px #ff4fd8;
+        border:1px solid #ff4fd8;
+        padding:8px 18px;
+      "
+    >
+      ACESSAR
+    </a>
+  `;
+}
 
   </script>
+
+</body>
+</html>
