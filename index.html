@@ -315,7 +315,7 @@ function verificarIdentidade() {
   const r = normalizar(document.getElementById("respostaIdentidade").value);
 
   // 🔥 NOMES-CHAVE
-  if (["ramon", "luan", "pancs"].includes(r)) {
+  if (["ramon", "luan", "pancs","toad","pancs","elly","luiz","neto"].includes(r)) {
     document.querySelectorAll(".fase").forEach(f => f.classList.remove("active"));
     document.getElementById("faseCaminho").classList.add("active");
 
